@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aadhaar-Voting | Login</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #004d40; /* Dark green background */
+            padding: 10px 20px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            margin-right: 10px;
+        }
+
+        .logout {
+            padding: 10px 20px;
+            background-color: white;
+            color: #004d40; /* Dark green text */
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .logout:hover {
+            background-color: #027663;
+            color: white;
+        }
+        /* Login Box */
+        .loginscreen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80dvh;
+            
+            max-height: 90dvh;
+            background-color: #f4f4f4;
+        }
+
+        .middle-box {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .middle-box .logo-name img {
+            width: 150px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-primary {
+            background-color: #004d40; /* Dark green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #013b32; /* Dark orange */
+        }
+
+        .alert {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .footer {
+            background-color: #a3a3a3; /* Dark green */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer img {
+            max-width: 300px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .logo-name img {
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <img src="images/e-voting-logo.png" alt="Logo" height="35" width="35">
+            BallotBox
+        </div>
+        <a href="/logout" class="logout">Logout</a>
+    </nav>
+
+    <!-- Main Login Content -->
+    <div class="loginscreen">
+        <div class="middle-box animated fadeInDown">
+            <div>
+                <h1 class="logo-name"><img src="images/e-voting-logo.png" alt="Logo" width="150"></h1>
+                <h3>Welcome to Aadhaar-Voting</h3>
+
+                <!-- Login Form -->
+                <div class="m-t">
+                    <div class="form-group">
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <button id="login" class="btn btn-primary">Login</button>
+                </div>
+
+                <!-- Error Message Box -->
+                <div id="messagebox" class="alert alert-danger fade in">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong id="errormsg">Error!</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div>
+            <a href=""><img src="https://www.eci.gov.in/newimg/eci-logo.svg" alt="ECI Logo"></a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+
+</body>
+</html>

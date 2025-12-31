@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Voting</title>
+
+  <!-- Google Material Icons & Materialize CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <style>
+    /* Full height for html and body */
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Flexbox layout for body to ensure footer stays at the bottom */
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    /* Main content section takes remaining space */
+    main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background-color: #004d40;
+      padding: 10px 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+
+    .nav-wrapper img {
+      height: 50px;
+    }
+
+    .brand-logo {
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+
+        .logout {
+      background-color: #fff;
+      color: #004d40;
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      margin-left: auto; /* Moves logout to the right */
+      height: 45px; /* Set height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logout:hover {
+      background-color: #027663;
+      color: white;
+    }
+
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #004d40;
+      color: white;
+    }
+
+    td img {
+      max-width: 50px;
+    }
+
+    /* Footer styling */
+    .footer {
+      background-color: #004d40;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      table {
+        font-size: 14px;
+      }
+
+      .logout {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <img src="images/e-voting-logo.png" alt="E-Voting" class="logo">
+      <div class="brand-logo center">E-Voting System</div>
+      <a href="/logout-both" class="logout">Logout</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <!-- News Alert -->
+      <div id="card-alert" class="card light-blue lighten-5">
+        <div class="card-content light-blue-text">
+          <p id="loc_info">NEWS: You have completed 5 actions.</p>
+        </div>
+      </div>
+
+      <!-- Voting Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Election Symbol</th>
+            <th>Party</th>
+            <th>Candidate Name</th>
+            <th>Vote</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="images/bjp.png" alt="BJP"></td>
+            <td>Bharatiya Janata Party</td>
+            <td>Sanat Taori</td>
+            <td><button id="vote1" class="btn waves-effect waves-light">Vote</button></td>
+          </tr>
+          <tr>
+            <td><img src="images/cong.png" alt="Congress"></td>
+            <td>Indian National Congress</td>
+            <td>Aniket Narkhede</td>
+            <td><button id="vote2" class="btn waves-effect waves-light">Vote</button></td>
+          </tr>
+          <tr>
+            <td><img src="images/rsc.png" alt="NCP"></td>
+            <td>Nationalist Congress Party</td>
+            <td>Mandar Patil</td>
+            <td><button id="vote3" class="btn waves-effect waves-light">Vote</button></td>
+          </tr>
+          <tr>
+            <td><img src="images/shiv.png" alt="Shiv Sena"></td>
+            <td>Shiv Sena</td>
+            <td>Akshay Motghare</td>
+            <td><button id="vote4" class="btn waves-effect waves-light">Vote</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>&copy; 2024 E-Voting System. All rights reserved. <a href="#">Privacy Policy</a></p>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+
+ 
+  <script type="text/javascript" src="js/clist.js"></script>
+</body>
+</html>

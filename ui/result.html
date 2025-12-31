@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: linear-gradient(to right, #004b8d, #00abf0);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #00abf0;
+        }
+
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Flexbox container styling */
+        .content-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        /* Chart container */
+        #chartContainer {
+            flex: 1;
+            padding: 20px;
+            max-width: 35%;
+        }
+
+        /* Table container */
+        #tableContainer {
+            flex: 1;
+            padding: 20px;
+            max-width: 50%;
+        }
+
+        /* Table Styling */
+        table {
+            font-family: 'Times New Roman', Times, serif;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid black;
+        }
+
+        th, td {
+            border: 1px solid black;
+        }
+
+        /* Table Header */
+        thead tr {
+            background: linear-gradient(to right, #004b8d, #00abf0);
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        th {
+            padding: 15px;
+        }
+
+        /* Table Body */
+        tbody tr {
+            transition: all 0.2s ease-in-out;
+        }
+
+        tbody tr:hover {
+            background: rgba(0, 171, 240, 0.1);
+        }
+
+        td {
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Logo Styling */
+        td img {
+            width: 35px;
+            height: 35px;
+        }
+
+        /* Percentage Column Styling */
+        td:nth-child(4) {
+            font-weight: bold;
+            color: #007BFF;
+        }
+
+        /* Animation for Table */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        table {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Election Results</div>
+        <div class="links">
+            <a href="/">Home</a>
+            <a href="#">Results</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div id="chartContainer">
+            <canvas id="resultChart"></canvas>
+        </div>
+        <div id="tableContainer">
+            <h3>Election Details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Logo</th>
+                        <th>Party Name</th>
+                        <th>Political Party</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <tbody id="partyTableBody">
+                    <!-- Populated via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Fetch data from the /result endpoint
+        fetch('/result')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data); // Debugging
+
+            const colors = {
+                "Bharatiya Janata Party": '#FF9933',
+                "Congress": '#138808',
+                "Nationalist Congress Party": '#0000FF',
+                "Shiv Sena": '#00ABAB',
+            };
+
+            const tableBody = document.getElementById('partyTableBody');
+            const labels = data.partyPercentages.map(item => item.politicalParty);
+            const percentages = data.partyPercentages.map(item => parseFloat(item.percentage));
+            const chartColors = [];
+
+            const logos = {
+                "Bharatiya Janata Party": "images/bjp.png",
+                "Congress": "images/cong.png",
+                "Nationalist Congress Party": "images/rsc.png",
+                "Shiv Sena": "images/shiv.png",
+            };
+
+            data.partyPercentages.forEach(item => {
+                const color = colors[item.politicalParty] || '#cccccc';
+                chartColors.push(color);
+
+                const logoPath = logos[item.politicalParty] || "images/default.png";
+
+                const row = `
+                    <tr>
+                        <td><img src="${logoPath}" alt="${item.politicalParty} Logo"></td>
+                        <td>${item.party}</td>
+                        <td>${item.politicalParty}</td>
+                        <td>${item.percentage}%</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+
+            // Create the pie chart
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            const resultChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Votes Percentage',
+                        data: percentages,
+                        backgroundColor: chartColors,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const label = tooltipItem.label || '';
+                                    const value = tooltipItem.raw || 0;
+                                    return `${label}: ${value.toFixed(2)}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching election data:', error);
+        });
+    </script>
+</body>
+</html>
